@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculators</title>
+  <style>
+    body { font-family: Arial; padding: 10px; }
+    .box { border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; }
+    input, select { width: 100%; padding: 5px; margin: 5px 0; border: 1px solid #ccc; }
+    button { width: 100%; padding: 8px; background: #0099ff; color: #fff; border: none; cursor: pointer; }
+    .result { margin-top: 8px; font-weight: bold; }
+</style>
+</head>
+<body>
+  <h2>Simple Calculators</h2>
+
+  <div class="box">
+    <h3>Interest</h3>
+    <input id="p" type="number" placeholder="P">
+    <input id="r" type="number" placeholder="R %">
+    <input id="t" type="number" placeholder="T years">
+    <button onclick="si()">Go</button>
+    <div id="siOut" class="result"></div>
+  </div>
+
+  <div class="box">
+    <h3>BMI</h3>
+    <input id="w" type="number" placeholder="Weight kg">
+    <input id="h" type="number" placeholder="Height cm">
+    <button onclick="bmi()">Go</button>
+    <div id="bmiOut" class="result"></div>
+  </div>
+
+  <div class="box">
+    <h3>Calories</h3>
+    <input id="age" type="number" placeholder="Age">
+    <input id="cw" type="number" placeholder="Weight kg">
+    <input id="ch" type="number" placeholder="Height cm">
+    <select id="gen">
+      <option value="m">Male</option>
+      <option value="f">Female</option>
+    </select>
+    <button onclick="cal()">Go</button>
+    <div id="calOut" class="result"></div>
+  </div>
+
+<script>
+  function v(id){ return Number(document.getElementById(id).value); }
+
+  
+  function si(){
+    var p = v('p');
+    var r = v('r');
+    var t = v('t');
+
+    if(p == 0){
+      siOut.innerText = 'Enter Principal';
+    } else {
+      if(r == 0){
+        siOut.innerText = 'Enter Rate';
+      } else {
+        if(t == 0){
+          siOut.innerText = 'Enter Time';
+        } else {
+          var ans = p * r * t / 100;
+          siOut.innerText = ans;
+        }
+      }
+    }
+  }
+
+  function bmi(){
+    var w = v('w');
+    var h = v('h');
+
+    if(w == 0){
+      bmiOut.innerText = 'Enter Weight';
+    } else {
+      if(h == 0){
+        bmiOut.innerText = 'Enter Height';
+      } else {
+        var m = h / 100;
+        var bmi = w / (m * m);
+        bmiOut.innerText = bmi.toFixed(2);
+      }
+    }
+  }
+
+  function cal(){
+    var a = v('age');
+    var w = v('cw');
+    var h = v('ch');
+    var g = document.getElementById('gen').value;
+
+    if(a == 0){
+      calOut.innerText = 'Enter Age';
+    } else {
+      if(w == 0){
+        calOut.innerText = 'Enter Weight';
+      } else {
+        if(h == 0){
+          calOut.innerText = 'Enter Height';
+        } else {
+          var bmr;
+          if(g == 'm'){
+            bmr = 10*w + 6.25*h + 5*a + 5;
+          } else {
+            bmr = 10*w + 6.25*h + 5*a - 161;
+          }
+          calOut.innerText = Math.round(bmr);
+        }
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
